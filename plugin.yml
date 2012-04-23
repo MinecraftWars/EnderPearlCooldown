@@ -1,4 +1,4 @@
-name: DEP
+name: EnderPearlCoolDown
 author: squid
 version: 1.0
-main: net.sqdmc.DEP.DEP
+main: net.sqdmc.EPC.EPC
