@@ -17,9 +17,9 @@ Configuration
 Example `plugin.yml`:
 
     cooldown: 3000
+    showMessage: true
 
-
-That's all! The number here is the time in milliseconds that players need to wait before throwing pearls.
+That's all! `cooldown` is the time in milliseconds that players need to wait before throwing pearls. `showMessage` determines whether users get feedback on unsuccessful throws or it just silently fails.
 
 Permissions
 -----------
