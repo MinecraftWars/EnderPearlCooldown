@@ -1,4 +1,4 @@
-package net.sqdmc.EPC;
+package net.sqdmc.epc;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,8 +14,9 @@ import org.bukkit.event.block.Action;
 
 public class EPCListener implements Listener{
         
-    private long cooldown = 15*1000; //15s
     private Map<Player,Long> lastThrow = new HashMap<Player,Long>();
+    
+    
     
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerUseEP(PlayerInteractEvent e){   
@@ -25,10 +26,22 @@ public class EPCListener implements Listener{
     	
         Long now = System.currentTimeMillis();
         Player player = e.getPlayer();
-                
+        
+        // may a player use pearls at all?
+        if (!player.hasPermission("enderpearl.use")) {
+        	if (EPC.EPC.showMessage)
+        		player.sendMessage("You may not use ender pearls");
+        	
+        	e.setCancelled(true);
+        	return;
+        }
+        
+        // apply cooldown to player?
         if(e.getItem() != null && e.getItem().getType() == Material.ENDER_PEARL  && !validthrow(player, now)){
         	// Display message and cooldown time.
-        	player.sendMessage(ChatColor.RED + "Teleportation with Enderpearls needs to cooldown! " + remainingCooldown(player, now) + " Seconds.");
+        	if (EPC.EPC.showMessage)
+        		player.sendMessage(ChatColor.RED + "Enderpearl cooldown remaining: " + remainingCooldown(player, now) + " seconds.");
+        	
         	e.setCancelled(true);
         }
     }
@@ -36,15 +49,24 @@ public class EPCListener implements Listener{
     /** Return remaining cooldown in seconds. */
     private long remainingCooldown(Player player, long throwTime) {
         Long lastPlayerPearl = lastThrow.get(player);
-        return (cooldown - (throwTime - lastPlayerPearl)) / 1000;
+        return (EPC.EPC.cooldown - (throwTime - lastPlayerPearl)) / 1000;
     }
     
+    /** Check if player is allowed to throw a pearl at this moment. */
     private boolean validthrow(Player player, long throwTime) {
+    	if (!player.hasPermission("enderpearl.cooldown"))
+    		return true; // no cooldown for this player
+    	 
+    	 
         Long lastPlayerPearl = lastThrow.get(player);
 
-        if (lastPlayerPearl == null || (throwTime - lastPlayerPearl) >= cooldown) {
+        // for players with cooldown, check if cooldown has passed
+        if (lastPlayerPearl == null || (throwTime - lastPlayerPearl) >= EPC.EPC.cooldown) {
+        	
             lastThrow.put(player, throwTime);
             return true;
-        } else { return false; }
+        } 
+        
+        return false;
     }
 }
