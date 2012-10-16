@@ -1,6 +1,6 @@
 name: EnderPearlCoolDown
-author: squid
-version: 1.0
+authors: [squidicuz, jasticE]
+version: 1.0.1
 main: net.sqdmc.epc.EPC
 
 commands:
@@ -9,7 +9,7 @@ commands:
     aliases: [enderpearlcooldown]
     usage: |
       /epc reload
-    permission: gringotts.admin
+    permission: enderpearl.admin
 
 permissions:
   enderpearl.cooldown:
