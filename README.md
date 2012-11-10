@@ -14,12 +14,15 @@ Drop the jar in your craftbukkit/plugins folder. Per default, enderpearls will h
 
 Configuration
 -------------
-Example `plugin.yml`:
+Example `plugin.yml` (default settings):
 
     cooldown: 3000
+    price: 0
     showMessage: true
 
-That's all! `cooldown` is the time in milliseconds that players need to wait before throwing pearls. `showMessage` determines whether users get feedback on unsuccessful throws or it just silently fails.
+* `cooldown` is the time in milliseconds that players need to wait before throwing pearls. 
+* `price` is how much each pearl throw costs
+* `showMessage` determines whether users get feedback on unsuccessful throws or it just silently fails.
 
 Permissions
 -----------
@@ -32,7 +35,12 @@ Ender pearl cooldown applies to players with this permission.
     enderpearl.use:
       default: true
 
-Ender pearls may be used by players with this permission
+Ender pearls may be used by players with this permission.
+
+    enderpearl.pay:
+      default: true
+
+Players with this permission pay for each pearl throw.
 
     enderpearl.admin:
       default: op

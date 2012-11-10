@@ -1,6 +1,6 @@
 name: EnderPearlCoolDown
 authors: [squidicuz, jasticE]
-version: 1.0.1
+version: 1.2.0
 main: net.sqdmc.epc.EPC
 
 commands:
@@ -13,8 +13,13 @@ commands:
 
 permissions:
   enderpearl.cooldown:
+    description: cooldown applies to using enderpearls
     default: true
   enderpearl.use:
+    description: may use enderpearls
+    default: true
+  enderpearl.pay:
+    description: pay a price for each enderpearl throw
     default: true
   enderpearl.admin:
     default: op

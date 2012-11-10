@@ -3,20 +3,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>minecraftwars</groupId>
 	<artifactId>EnderPearlCooldown</artifactId>
-	<version>1.0.1</version>
+	<version>1.2.0</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		
-	    <resources>
-	      <resource>
-	        <directory>${basedir}</directory>
-	        <includes>
-	          <include>*.yml</include>
-	          <include>LICENSE.txt</include>
-	          <include>README.md</include>
-	        </includes>
-	      </resource>
-	    </resources>
+
+		<resources>
+			<resource>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>*.yml</include>
+					<include>LICENSE.txt</include>
+					<include>README.md</include>
+				</includes>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -46,6 +46,23 @@
 					</descriptorRefs>
 				</configuration>
 			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>2.0</version>
+                <configuration>
+                    <artifactSet>
+                    </artifactSet>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
@@ -53,7 +70,18 @@
 		<dependency>
 			<groupId>org.bukkit</groupId>
 			<artifactId>bukkit</artifactId>
-			<version>1.4.2-R0.1-SNAPSHOT</version>
+			<version>1.4.2-R0.3-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mcstats</groupId>
+			<artifactId>metrics-lite</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.milkbowl.vault</groupId>
+			<artifactId>Vault</artifactId>
+			<version>1.2.20-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
@@ -72,14 +100,23 @@
 		<url>https://github.com/MinecraftWars/EnderPearlCooldown/issues</url>
 	</issueManagement>
 	<repositories>
-		<repository>
-			<id>bukkit-repo</id>
-			<url>http://repo.bukkit.org/content/groups/public/</url>
-		</repository>
-		<repository>
-			<id>mcw-repo</id>
-			<url>https://github.com/MinecraftWars/mcw-mvn-repo/raw/master/releases</url>
-		</repository>
+        <repository>
+            <id>bukkit-repo</id>
+            <url>http://repo.bukkit.org/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>mcw-repo</id>
+            <url>https://github.com/MinecraftWars/mcw-mvn-repo/raw/master/releases</url>
+        </repository>
+        <repository>
+            <id>Plugin Metrics</id>
+            <url>http://repo.mcstats.org/content/repositories/public</url>
+        </repository>
+        <repository>
+            <id>Milkbowl-repo</id>
+            <name>Milkbowl</name>
+            <url>http://ci.herocraftonline.com/plugin/repository/everything/</url>
+        </repository>
 	</repositories>
 
 </project>
