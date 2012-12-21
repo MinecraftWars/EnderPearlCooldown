@@ -53,15 +53,22 @@ public class EPC extends JavaPlugin {
             MetricsLite metrics = new MetricsLite(this);
             metrics.start();
         } catch (IOException e) {
-        	log.info("[EPC] Failed to submit PluginMetrics stats");
+        	log.info("Failed to submit PluginMetrics stats");
         }
     }
     
     private boolean setupEconomy()
     {
-        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
-        if (economyProvider != null) {
-            economy = economyProvider.getProvider();
+    	try {
+	        @SuppressWarnings("unchecked")
+            Class<Economy> c = (Class<Economy>) Class.forName("net.milkbowl.vault.economy.Economy");
+	        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(c);
+	        if (economyProvider != null) 
+	            economy = economyProvider.getProvider();
+	        
+        } catch (ClassNotFoundException e) {
+        	log.info("Unable to load Vault. Enderpearl throwing price is disabled.");
+	        price = 0;
         }
 
         return (economy != null);

@@ -50,7 +50,7 @@ public class EPCListener implements Listener{
     
     /** Check if player needs to and can pay for a throw. */ 
     private boolean pay(Player player) {
-    	if (!player.hasPermission("enderpearl.pay") || EPC.EPC.economy == null)
+    	if (!player.hasPermission("enderpearl.pay") || EPC.EPC.price == 0 || EPC.EPC.economy == null)
     		return true;
     	
     	String name = player.getName();
