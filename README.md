@@ -1,12 +1,13 @@
 Ender Pearl Cooldown
 ====================
 
-Simple Bukkit plugin to add a cooldown to ender pearls.
+Simple Bukkit plugin to add a cooldown or cost to ender pearls.
 
 Features
 --------
 * add cooldown to ender pearls
 * disable ender pearls completely on a per-user basis (permission)
+* charge money for throwing pearls
 
 Installation
 ------------

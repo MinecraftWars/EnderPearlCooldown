@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.2.1
+------
+* fix EPC not starting correctly without Vault installed
+
 v1.2.0
 ------
 * support payment per pearl throw
