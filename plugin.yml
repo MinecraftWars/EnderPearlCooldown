@@ -3,6 +3,8 @@ authors: [squidicuz, jasticE]
 version: 1.2.1
 main: net.sqdmc.epc.EPC
 
+softdepend: [Vault]
+
 commands:
   epc:
     description: Reload configuration
