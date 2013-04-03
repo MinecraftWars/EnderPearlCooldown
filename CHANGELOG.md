@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.3.0
+------
+* made messages customizable in config
+
 v1.2.1
 ------
 * fix EPC not starting correctly without Vault installed

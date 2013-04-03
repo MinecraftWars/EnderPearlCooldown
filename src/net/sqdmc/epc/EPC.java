@@ -6,9 +6,9 @@ import java.util.logging.Logger;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mcstats.MetricsLite;
@@ -27,8 +27,15 @@ public class EPC extends JavaPlugin {
     /** Price of a pearl throw. */
     double price = 0;
 
-    /** Show cooldown message. */
+    /** Show cooldown messages. */
     boolean showMessage = true;
+
+    /** Message to show on insufficient funds to cast enderpearl. */
+    String messageMoney = "§cNot enough money to throw pearl. Need at least {price}.";
+    /** Message to show on cooldown. */
+    String messageCooldown = "§cEnderpearl cooldown remaining: {seconds} seconds.";
+    /** Message to send if player is not allowed to use ender pearls. */
+    String messageNotAllowed = "§cYou may not use ender pearls.";
 
     /** Vault hook. */
     Economy economy = null;
@@ -43,11 +50,10 @@ public class EPC extends JavaPlugin {
         PluginManager pm = getServer().getPluginManager();
         pm.registerEvents(new EPCListener(), this);
 
-        getCommand("epc").setExecutor(new Commands());
+        getCommand("epc").setExecutor(this);
 
         setupEconomy(); 
-
-        loadConfig();
+        reloadConfig();
 
         try {
             MetricsLite metrics = new MetricsLite(this);
@@ -78,28 +84,29 @@ public class EPC extends JavaPlugin {
         return (economy != null);
     }
 
-    private void loadConfig() {
-        reloadConfig();
+    @Override public void reloadConfig() {
+        super.reloadConfig();
         Configuration config = getConfig();
         cooldown = config.getLong("cooldown");
         price = config.getDouble("price");
+
+        ConfigurationSection msgs = config.getConfigurationSection("messages");
+        messageCooldown = msgs.getString("cooldown", messageCooldown);
+        messageMoney = msgs.getString("money", messageMoney);
+        messageNotAllowed = msgs.getString("notallowed", messageNotAllowed);
     }
 
 
-    private class Commands implements CommandExecutor {
+    @Override
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 
-        @Override
-        public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-
-            if (args.length >=1 && "reload".equalsIgnoreCase(args[0])) {
-                loadConfig();
-                sender.sendMessage("[EPC] Reloaded configuration!");
-                return true;
-            }
-
-            return false;
+        if (args.length >=1 && "reload".equalsIgnoreCase(args[0])) {
+            reloadConfig();
+            sender.sendMessage("[EPC] Reloaded configuration!");
+            return true;
         }
 
+        return false;
     }
 
 }

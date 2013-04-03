@@ -8,6 +8,7 @@ Features
 * add cooldown to ender pearls
 * disable ender pearls completely on a per-user basis (permission)
 * charge money for throwing pearls
+* customizable messages
 
 Installation
 ------------
@@ -21,9 +22,15 @@ Example `plugin.yml` (default settings):
     price: 0
     showMessage: true
 
+    messages:
+      money: "§cNot enough money to throw pearl. Need at least {price}."
+      cooldown: "§cEnderpearl cooldown remaining: {seconds} seconds."
+      notallowed: "§cYou may not use ender pearls."
+
 * `cooldown` is the time in milliseconds that players need to wait before throwing pearls. 
 * `price` is how much each pearl throw costs
 * `showMessage` determines whether users get feedback on unsuccessful throws or it just silently fails.
+* `messages` are the individual messages sent to players when pearl throws fail.
 
 Permissions
 -----------
