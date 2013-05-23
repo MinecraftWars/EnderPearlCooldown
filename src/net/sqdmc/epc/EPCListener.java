@@ -32,8 +32,7 @@ public class EPCListener implements Listener{
 
         // may a player use pearls at all?
         if (!player.hasPermission("enderpearl.use")) {
-            if (EPC.showMessage)
-                player.sendMessage(EPC.messageNotAllowed);
+            sendMessageChecked(player, EPC.messageNotAllowed);
 
             event.setCancelled(true);
             return;
@@ -61,8 +60,7 @@ public class EPCListener implements Listener{
         if (EPC.economy.has(name, price))
             success = EPC.economy.withdrawPlayer(name, price).transactionSuccess();
 
-        if (!success && EPC.showMessage)
-            player.sendMessage(EPC.messageMoney.replace("{price}", EPC.economy.format(price)));
+        if (!success) sendMessageChecked(player, EPC.messageMoney.replace("{price}", EPC.economy.format(price)));
         return success;
     }
 
@@ -84,9 +82,11 @@ public class EPCListener implements Listener{
         if (lastPlayerPearl == null || (throwTime - lastPlayerPearl) >= EPC.cooldown)
             return true;
 
-        if (EPC.showMessage)
-            player.sendMessage(EPC.messageCooldown.replace("{seconds}", String.format("%.1f", remainingCooldown(player, throwTime))));
-
+        sendMessageChecked(player, EPC.messageCooldown.replace("{seconds}", String.format("%.1f", remainingCooldown(player, throwTime))) );
         return false;
+    }
+    
+    private static void sendMessageChecked(Player player, String message) {
+        if (EPC.showMessage) player.sendMessage(message);
     }
 }

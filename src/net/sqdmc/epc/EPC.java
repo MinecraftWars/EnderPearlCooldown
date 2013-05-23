@@ -89,6 +89,7 @@ public class EPC extends JavaPlugin {
         Configuration config = getConfig();
         cooldown = config.getLong("cooldown");
         price = config.getDouble("price");
+        showMessage = config.getBoolean("showMessage");
 
         ConfigurationSection msgs = config.getConfigurationSection("messages");
         messageCooldown = msgs.getString("cooldown", messageCooldown);
