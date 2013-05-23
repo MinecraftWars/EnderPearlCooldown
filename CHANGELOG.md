@@ -1,6 +1,10 @@
 Changelog
 =========
 
+v1.3.1
+------
+* fix showMessage config being ignored
+
 v1.3.0
 ------
 * made messages customizable in config
