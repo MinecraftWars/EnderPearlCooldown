@@ -1,0 +1,27 @@
+name: EnderPearlCoolDown
+authors: [squidicuz, jasticE]
+version: ${project.version}
+main: net.sqdmc.enderpearlcooldown.EPC
+
+softdepend: [Vault]
+
+commands:
+  epc:
+    description: Reload configuration
+    aliases: [enderpearlcooldown]
+    usage: |
+      /epc reload
+    permission: enderpearl.admin
+
+permissions:
+  enderpearl.cooldown:
+    description: cooldown applies to using enderpearls
+    default: true
+  enderpearl.use:
+    description: may use enderpearls
+    default: true
+  enderpearl.pay:
+    description: pay a price for each enderpearl throw
+    default: true
+  enderpearl.admin:
+    default: op

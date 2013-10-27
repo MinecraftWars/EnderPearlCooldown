@@ -48,39 +48,33 @@
     </build>
 
     <dependencies>
-                <dependency>
-                        <groupId>org.bukkit</groupId>
-                        <artifactId>bukkit</artifactId>
-                        <version>LATEST</version>
-                        <scope>provided</scope>
-                </dependency>
-                <dependency>
-                        <groupId>org.mcstats</groupId>
-                        <artifactId>metrics-lite</artifactId>
-                        <version>1.1</version>
-                </dependency>
-                <dependency>
-                        <groupId>net.milkbowl.vault</groupId>
-                        <artifactId>Vault</artifactId>
-                        <version>1.2.25-SNAPSHOT</version>
-                        <scope>provided</scope>
-                </dependency>
-        </dependencies>
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>LATEST</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.milkbowl.vault</groupId>
+            <artifactId>Vault</artifactId>
+            <version>1.2.25-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
-        <properties>
-                <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        </properties>
-
-        <scm>
-                <url>https://github.com/MinecraftWars/EnderPearlCooldown</url>
-                <connection>scm:git:git://github.com:MinecraftWars/EnderPearlCooldown.git</connection>
-                <developerConnection>scm:git:git@github.com:MinecraftWars/EnderPearlCooldown.git</developerConnection>
-        </scm>
-        <issueManagement>
-                <system>GitHub</system>
-                <url>https://github.com/MinecraftWars/EnderPearlCooldown/issues</url>
-        </issueManagement>
-        <repositories>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    <scm>
+        <url>https://github.com/MinecraftWars/EnderPearlCooldown</url>
+        <connection>scm:git:git://github.com:MinecraftWars/EnderPearlCooldown.git</connection>
+        <developerConnection>scm:git:git@github.com:MinecraftWars/EnderPearlCooldown.git</developerConnection>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/MinecraftWars/EnderPearlCooldown/issues</url>
+    </issueManagement>
+    <repositories>
         <repository>
             <id>bukkit-repo</id>
             <url>http://repo.bukkit.org/content/groups/public/</url>
@@ -90,14 +84,10 @@
             <url>https://github.com/MinecraftWars/mcw-mvn-repo/raw/master/releases</url>
         </repository>
         <repository>
-            <id>Plugin Metrics</id>
-            <url>http://repo.mcstats.org/content/repositories/public</url>
-        </repository>
-        <repository>
             <id>Milkbowl-repo</id>
             <name>Milkbowl</name>
             <url>http://ci.herocraftonline.com/plugin/repository/everything/</url>
         </repository>
-        </repositories>
+    </repositories>
 
 </project>
