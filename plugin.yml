@@ -1,6 +1,6 @@
 name: EnderPearlCoolDown
 authors: [squidicuz, jasticE]
-version: 1.0.1
+version: ${project.version}
 main: net.sqdmc.epc.EPC
 
 commands:
