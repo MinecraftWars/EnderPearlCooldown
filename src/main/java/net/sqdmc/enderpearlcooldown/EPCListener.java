@@ -25,6 +25,21 @@ public class EPCListener implements Listener {
                 || event.getItem().getType() != Material.ENDER_PEARL) {
             return;
         }
+        // ignore certain materials...
+        if (event.getClickedBlock() != null && !event.isCancelled() && !event.getPlayer().isSneaking()) {
+            Material clickedMat = event.getClickedBlock().getType();
+            if (clickedMat == Material.CHEST
+                    || clickedMat == Material.ENDER_CHEST
+                    || clickedMat == Material.FURNACE
+                    || clickedMat == Material.WORKBENCH
+                    || clickedMat == Material.HOPPER
+                    || clickedMat == Material.ANVIL
+                    || clickedMat == Material.COMMAND
+                    || clickedMat == Material.DROPPER
+                    || clickedMat == Material.DISPENSER) {
+                return;
+            }
+        }
 
         Player player = event.getPlayer();
 
