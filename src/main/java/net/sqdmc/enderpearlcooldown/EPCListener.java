@@ -1,8 +1,5 @@
 package net.sqdmc.enderpearlcooldown;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,10 +8,23 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.*;
+
+import static org.bukkit.Material.*;
+
 public class EPCListener implements Listener {
 
     /** playername -> last throw timestamp */
     private final Map<String, Long> lastThrow = new HashMap<String, Long>();
+
+    // materials that allow interactions are ignored, since the enderpearl will not fire
+    private final static Set<Material> interactables =
+            new HashSet<>(Arrays.asList(
+                ANVIL, COMMAND, BED, BED_BLOCK, DISPENSER, DROPPER, ENCHANTMENT_TABLE,
+                ENDER_CHEST, FENCE_GATE, FURNACE, HOPPER, IRON_DOOR, IRON_DOOR_BLOCK,
+                ITEM_FRAME, LEVER, REDSTONE_COMPARATOR, REDSTONE_COMPARATOR_OFF, REDSTONE_COMPARATOR_ON,
+                STONE_BUTTON, TRAP_DOOR, WOODEN_DOOR, WOOD_BUTTON, WOOD_DOOR, WORKBENCH
+            ));
 
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerUseEP(PlayerInteractEvent event) {
@@ -22,23 +32,13 @@ public class EPCListener implements Listener {
         if (event.getAction() == Action.LEFT_CLICK_AIR
                 || event.getAction() == Action.LEFT_CLICK_BLOCK
                 || event.getItem() == null
-                || event.getItem().getType() != Material.ENDER_PEARL) {
+                || event.getItem().getType() != ENDER_PEARL) {
             return;
         }
         // ignore certain materials...
         if (event.getClickedBlock() != null && !event.isCancelled() && !event.getPlayer().isSneaking()) {
             Material clickedMat = event.getClickedBlock().getType();
-            if (clickedMat == Material.CHEST
-                    || clickedMat == Material.ENDER_CHEST
-                    || clickedMat == Material.FURNACE
-                    || clickedMat == Material.WORKBENCH
-                    || clickedMat == Material.HOPPER
-                    || clickedMat == Material.ANVIL
-                    || clickedMat == Material.COMMAND
-                    || clickedMat == Material.DROPPER
-                    || clickedMat == Material.DISPENSER) {
-                return;
-            }
+            if (interactables.contains(clickedMat)) return;
         }
 
         Player player = event.getPlayer();
