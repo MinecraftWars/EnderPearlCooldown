@@ -1,16 +1,16 @@
 package net.sqdmc.enderpearlcooldown;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-
 import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.mcstats.MetricsLite;
+
+import java.io.IOException;
+import java.util.logging.Logger;
 
 public class EPC extends JavaPlugin {
 
@@ -104,7 +104,7 @@ public class EPC extends JavaPlugin {
 
     private void startMetrics() {
         try {
-            Metrics metrics = new Metrics(this);
+            MetricsLite metrics = new MetricsLite(this);
             metrics.start();
         } catch (IOException ex) {
             getLogger().warning("Failed to load metrics :(");
