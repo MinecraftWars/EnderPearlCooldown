@@ -71,11 +71,10 @@ public class EPCListener implements Listener {
             return true;
         }
 
-        String name = player.getName();
         double price = EPC.getInstance().price;
         boolean success = false;
-        if (EPC.getInstance().economy.has(name, price)) {
-            success = EPC.getInstance().economy.withdrawPlayer(name, price)
+        if (EPC.getInstance().economy.has(player, price)) {
+            success = EPC.getInstance().economy.withdrawPlayer(player, price)
                     .transactionSuccess();
         }
 
@@ -83,7 +82,7 @@ public class EPCListener implements Listener {
             sendMessageChecked(
                     player,
                     EPC.getInstance().messageMoney.replace("{price}",
-                            EPC.getInstance().economy.format(price)));
+                    EPC.getInstance().economy.format(price)));
         }
         return success;
     }
