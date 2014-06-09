@@ -45,7 +45,7 @@ public class EPCListener implements Listener {
 
         // may a player use pearls at all?
         if (!player.hasPermission("enderpearl.use")) {
-            sendMessageChecked(player, EPC.getIstance().messageNotAllowed);
+            sendMessageChecked(player, EPC.getInstance().messageNotAllowed);
             event.setCancelled(true);
             return;
         }
@@ -66,24 +66,24 @@ public class EPCListener implements Listener {
     /** Check if player needs to and can pay for a throw. */
     private boolean pay(Player player) {
         if (!player.hasPermission("enderpearl.pay")
-                || EPC.getIstance().price == 0
-                || EPC.getIstance().economy == null) {
+                || EPC.getInstance().price == 0
+                || EPC.getInstance().economy == null) {
             return true;
         }
 
         String name = player.getName();
-        double price = EPC.getIstance().price;
+        double price = EPC.getInstance().price;
         boolean success = false;
-        if (EPC.getIstance().economy.has(name, price)) {
-            success = EPC.getIstance().economy.withdrawPlayer(name, price)
+        if (EPC.getInstance().economy.has(name, price)) {
+            success = EPC.getInstance().economy.withdrawPlayer(name, price)
                     .transactionSuccess();
         }
 
         if (!success) {
             sendMessageChecked(
                     player,
-                    EPC.getIstance().messageMoney.replace("{price}",
-                            EPC.getIstance().economy.format(price)));
+                    EPC.getInstance().messageMoney.replace("{price}",
+                            EPC.getInstance().economy.format(price)));
         }
         return success;
     }
@@ -91,7 +91,7 @@ public class EPCListener implements Listener {
     /** Return remaining cooldown in seconds. */
     private double remainingCooldown(Player player, long throwTime) {
         Long lastPlayerPearl = lastThrow.get(player.getName());
-        return (EPC.getIstance().cooldown - (throwTime - lastPlayerPearl)) / 1000.0;
+        return (EPC.getInstance().cooldown - (throwTime - lastPlayerPearl)) / 1000.0;
     }
 
     /** Check if player is allowed to throw a pearl at this moment. */
@@ -104,13 +104,13 @@ public class EPCListener implements Listener {
 
         // for players with cooldown, check if cooldown has passed
         if (lastPlayerPearl == null
-                || (throwTime - lastPlayerPearl) >= EPC.getIstance().cooldown) {
+                || (throwTime - lastPlayerPearl) >= EPC.getInstance().cooldown) {
             return true;
         }
 
         sendMessageChecked(
                 player,
-                EPC.getIstance().messageCooldown.replace(
+                EPC.getInstance().messageCooldown.replace(
                         "{seconds}",
                         String.format("%.1f",
                                 remainingCooldown(player, throwTime))));
@@ -118,7 +118,7 @@ public class EPCListener implements Listener {
     }
 
     private static void sendMessageChecked(Player player, String message) {
-        if (EPC.getIstance().showMessage) {
+        if (EPC.getInstance().showMessage) {
             player.sendMessage(message);
         }
     }

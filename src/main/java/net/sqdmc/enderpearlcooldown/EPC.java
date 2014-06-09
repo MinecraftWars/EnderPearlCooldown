@@ -111,7 +111,7 @@ public class EPC extends JavaPlugin {
         }
     }
 
-    public static EPC getIstance() {
+    public static EPC getInstance() {
         return instance;
     }
 
