@@ -20,10 +20,11 @@ public class EPCListener implements Listener {
     // materials that allow interactions are ignored, since the enderpearl will not fire
     private final static Set<Material> interactables =
             new HashSet<>(Arrays.asList(
-                ANVIL, COMMAND, BED, BED_BLOCK, DISPENSER, DROPPER, ENCHANTMENT_TABLE,
-                ENDER_CHEST, FENCE_GATE, FURNACE, HOPPER, IRON_DOOR, IRON_DOOR_BLOCK,
-                ITEM_FRAME, LEVER, REDSTONE_COMPARATOR, REDSTONE_COMPARATOR_OFF, REDSTONE_COMPARATOR_ON,
-                STONE_BUTTON, TRAP_DOOR, WOODEN_DOOR, WOOD_BUTTON, WOOD_DOOR, WORKBENCH
+                ANVIL, COMMAND, BED, BEACON, BED_BLOCK, BREWING_STAND, BURNING_FURNACE, CAKE_BLOCK, CHEST,
+                DIODE, DIODE_BLOCK_OFF, DIODE_BLOCK_ON, DISPENSER, DROPPER, ENCHANTMENT_TABLE, ENDER_CHEST, FENCE_GATE,
+                FENCE_GATE, FURNACE, HOPPER, IRON_DOOR, IRON_DOOR_BLOCK, ITEM_FRAME, LEVER,  REDSTONE_COMPARATOR,
+                REDSTONE_COMPARATOR_OFF, REDSTONE_COMPARATOR_ON, STONE_BUTTON, TRAP_DOOR, TRAPPED_CHEST,
+                WOODEN_DOOR, WOOD_BUTTON, WOOD_DOOR, WORKBENCH
             ));
 
     @EventHandler(priority = EventPriority.NORMAL)
