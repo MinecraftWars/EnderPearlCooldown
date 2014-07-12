@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sqdmc</groupId>
     <artifactId>EnderPearlCooldown</artifactId>
-    <version>1.5.0</version>
+    <version>1.5.1-SNAPSHOT</version>
 
     <build>
         <resources>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.7.9-R02</version>
+            <version>1.7.9-R0.2</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
