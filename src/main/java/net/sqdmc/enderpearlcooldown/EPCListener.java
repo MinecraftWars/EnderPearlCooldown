@@ -30,6 +30,8 @@ public class EPCListener implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     public void onPlayerUseEP(PlayerInteractEvent event) {
 
+        if (event.isCancelled()) return;
+
         if (event.getAction() == Action.LEFT_CLICK_AIR
                 || event.getAction() == Action.LEFT_CLICK_BLOCK
                 || event.getItem() == null
@@ -37,7 +39,7 @@ public class EPCListener implements Listener {
             return;
         }
         // ignore certain materials...
-        if (event.getClickedBlock() != null && !event.isCancelled() && !event.getPlayer().isSneaking()) {
+        if (event.getClickedBlock() != null && !event.getPlayer().isSneaking()) {
             Material clickedMat = event.getClickedBlock().getType();
             if (interactables.contains(clickedMat)) return;
         }
