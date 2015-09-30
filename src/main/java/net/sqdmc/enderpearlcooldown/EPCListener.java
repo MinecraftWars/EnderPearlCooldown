@@ -1,5 +1,6 @@
 package net.sqdmc.enderpearlcooldown;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -101,6 +102,9 @@ public class EPCListener implements Listener {
         if (!player.hasPermission("enderpearl.cooldown")) {
             return true; // no cooldown for this player
         }
+
+        if (player.getGameMode() == GameMode.CREATIVE)
+            return false;
 
         Long lastPlayerPearl = lastThrow.get(player.getName());
 
